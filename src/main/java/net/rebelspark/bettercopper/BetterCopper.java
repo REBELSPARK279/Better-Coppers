@@ -13,6 +13,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.rebelspark.bettercopper.item.ModCreativeModeTabs;
+import net.rebelspark.bettercopper.item.ModItems;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -36,6 +38,17 @@ public class BetterCopper {
 
     public BetterCopper() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+
+        ModCreativeModeTabs.register(modEventBus);
+
+        ModItems.register(modEventBus);
+
+        modEventBus.addListener(this::commonSetup);
+        MinecraftForge.EVENT_BUS.register(this);
+
+        modEventBus.addListener(this::addCreative);
+
 
         modEventBus.addListener(this::commonSetup);
 
